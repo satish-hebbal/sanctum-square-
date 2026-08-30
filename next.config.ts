@@ -1,6 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Lets a phone on the same Wi-Fi load the dev server's JS chunks and HMR
+  // socket when testing against the network URL — Next blocks that by
+  // default. Without this, the phone gets HTML and CSS but no JavaScript at
+  // all, so nothing that depends on a click handler (the theme toggle, the
+  // mobile menu's enhancements) actually runs.
+  allowedDevOrigins: ["192.168.29.38"],
   images: {
     // Source media is pre-encoded to WebP by `npm run media`; the optimiser
     // only has to resize and (where supported) re-encode to AVIF.

@@ -46,9 +46,22 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fffdf7",
-  colorScheme: "light",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fffdf7" },
+    { media: "(prefers-color-scheme: dark)", color: "#171512" },
+  ],
+  colorScheme: "light dark",
 };
+
+/**
+ * Applies a saved manual theme choice before first paint, so a reader who
+ * has overridden their OS preference does not see a flash of the wrong
+ * theme while React hydrates. The CSS in globals.css handles every other
+ * case (no override at all) on its own via `prefers-color-scheme` — this
+ * script exists only for the override, and only ever sets one attribute.
+ */
+const THEME_INIT_SCRIPT =
+  `(function(){try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark'){document.documentElement.setAttribute('data-theme',t);}}catch(e){}})();`;
 
 export default function RootLayout({
   children,
@@ -56,8 +69,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
+        {/*
+          Sets `data-theme` before hydration when a reader has manually
+          overridden their OS preference — see THEME_INIT_SCRIPT above.
+          `suppressHydrationWarning` on <html> is the one exception to the
+          "no script mutates <html> before hydration" rule below: a manual
+          theme choice is *expected* to differ between the server markup and
+          the client on first paint, so this tells React not to treat that
+          one attribute as a mismatch rather than working around a problem
+          that does not apply here.
+        */}
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
+
         {/*
           With scripting off, the reveal animations are never going to run, so
           there is no reason to make a reader wait out the CSS fallback delay —

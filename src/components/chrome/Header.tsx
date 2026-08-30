@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import { nav, studio } from "@/content/studio";
 import { cx } from "@/lib/cx";
 import { ArrowNE, Container } from "@/components/ui/primitives";
+import { LogoMark } from "@/components/ui/LogoMark";
+import { ThemeToggle } from "@/components/chrome/ThemeToggle";
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -92,7 +94,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-paper" data-intro-header>
       <Container>
-        <div className="flex h-16 items-center justify-between sm:h-22">
+        <div className="flex h-16 items-center justify-between sm:h-22 md:h-20">
           {/*
             The opening reveal animates this exact element from the middle of
             the screen into place — see components/motion/Intro.tsx. It is
@@ -105,15 +107,7 @@ export function Header() {
             aria-label={`${studio.name} — home`}
             data-intro-lockup
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/logo-mark.svg"
-              alt=""
-              width={34}
-              height={33}
-              className="h-7 w-auto sm:h-8"
-              data-intro-mark
-            />
+            <LogoMark className="h-7 w-auto sm:h-8" data-intro-mark />
             <span className="flex flex-col" data-intro-word>
               <span className="text-[0.9375rem] leading-none font-medium tracking-[0.18em] uppercase sm:text-[1.0625rem]">
                 {studio.name}
@@ -124,111 +118,115 @@ export function Header() {
             </span>
           </Link>
 
-          <nav aria-label="Primary" className="hidden md:block" data-intro-chrome>
-            <ul className="flex items-center gap-10">
-              {nav.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    aria-current={
-                      isActive(pathname, item.href) ? "page" : undefined
-                    }
-                    className={cx(
-                      "text-nav uppercase transition-colors duration-300",
-                      isActive(pathname, item.href)
-                        ? "text-ink"
-                        : "text-graphite hover:text-ink",
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <nav aria-label="Primary" className="hidden md:block" data-intro-chrome>
+              <ul className="flex items-center gap-10">
+                {nav.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      aria-current={
+                        isActive(pathname, item.href) ? "page" : undefined
+                      }
+                      className={cx(
+                        "text-nav uppercase transition-colors duration-300",
+                        isActive(pathname, item.href)
+                          ? "text-ink"
+                          : "text-graphite hover:text-ink",
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
 
-          <details
-            ref={detailsRef}
-            className="site-menu md:hidden"
-            data-intro-chrome
-            onToggle={(e) => {
-              const isOpen = (e.currentTarget as HTMLDetailsElement).open;
-              setOpen(isOpen);
-              if (isOpen) setSession((n) => n + 1);
-            }}
-          >
-            {/*
-              A 44px target, held off the right edge — flush against it on iOS
-              the hit area overlaps the system back-swipe zone and taps get
-              eaten. `touch-action: manipulation` drops the double-tap delay.
-            */}
-            <summary
-              aria-label="Menu"
-              className="flex size-11 cursor-pointer touch-manipulation items-center justify-center select-none"
+            <ThemeToggle data-intro-chrome />
+
+            <details
+              ref={detailsRef}
+              className="site-menu md:hidden"
+              data-intro-chrome
+              onToggle={(e) => {
+                const isOpen = (e.currentTarget as HTMLDetailsElement).open;
+                setOpen(isOpen);
+                if (isOpen) setSession((n) => n + 1);
+              }}
             >
               {/*
-                Three bars rather than two icons swapped over, so the control
-                folds into the cross instead of cutting to it. Drawn here in
-                spans because it has to animate: lucide gives back finished
-                SVG paths, and a Menu glyph cannot become an X glyph.
+                A 44px target, held off the right edge — flush against it on iOS
+                the hit area overlaps the system back-swipe zone and taps get
+                eaten. `touch-action: manipulation` drops the double-tap delay.
               */}
-              <span className="menu-icon" aria-hidden>
-                <span />
-                <span />
-                <span />
-              </span>
-            </summary>
-
-            <div
-              id="site-menu"
-              className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto overscroll-contain bg-paper sm:top-22"
-            >
-              <Container
-                key={session}
-                className="flex min-h-full flex-col justify-between gap-(--spacing-block) py-(--spacing-block)"
+              <summary
+                aria-label="Menu"
+                className="flex size-11 cursor-pointer touch-manipulation items-center justify-center select-none"
               >
-                <nav aria-label="Primary">
-                  <ul>
-                    {nav.map((item) => (
-                      <li
-                        key={item.href}
-                        className="site-menu-item border-b border-hairline"
-                      >
-                        <Link
-                          href={item.href}
-                          onClick={close}
-                          aria-current={
-                            isActive(pathname, item.href) ? "page" : undefined
-                          }
-                          className={cx(
-                            "text-project flex items-center justify-between gap-4 py-5",
-                            isActive(pathname, item.href)
-                              ? "text-ink"
-                              : "text-graphite",
-                          )}
-                        >
-                          {item.label}
-                          <ArrowNE className="size-[0.55em]" />
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
+                {/*
+                  Three bars rather than two icons swapped over, so the control
+                  folds into the cross instead of cutting to it. Drawn here in
+                  spans because it has to animate: lucide gives back finished
+                  SVG paths, and a Menu glyph cannot become an X glyph.
+                */}
+                <span className="menu-icon" aria-hidden>
+                  <span />
+                  <span />
+                  <span />
+                </span>
+              </summary>
 
-                <div className="site-menu-foot text-body text-graphite">
-                  <a href={`mailto:${studio.contact.email}`} className="block">
-                    {studio.contact.email}
-                  </a>
-                  <a
-                    href={`tel:${studio.contact.phoneHref}`}
-                    className="mt-1 block"
-                  >
-                    {studio.contact.phone}
-                  </a>
-                </div>
-              </Container>
-            </div>
-          </details>
+              <div
+                id="site-menu"
+                className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto overscroll-contain bg-paper sm:top-22"
+              >
+                <Container
+                  key={session}
+                  className="flex min-h-full flex-col justify-between gap-(--spacing-block) py-(--spacing-block)"
+                >
+                  <nav aria-label="Primary">
+                    <ul>
+                      {nav.map((item) => (
+                        <li
+                          key={item.href}
+                          className="site-menu-item border-b border-hairline"
+                        >
+                          <Link
+                            href={item.href}
+                            onClick={close}
+                            aria-current={
+                              isActive(pathname, item.href) ? "page" : undefined
+                            }
+                            className={cx(
+                              "text-project flex items-center justify-between gap-4 py-5",
+                              isActive(pathname, item.href)
+                                ? "text-ink"
+                                : "text-graphite",
+                            )}
+                          >
+                            {item.label}
+                            <ArrowNE className="size-[0.55em]" />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </nav>
+
+                  <div className="site-menu-foot text-body text-graphite">
+                    <a href={`mailto:${studio.contact.email}`} className="block">
+                      {studio.contact.email}
+                    </a>
+                    <a
+                      href={`tel:${studio.contact.phoneHref}`}
+                      className="mt-1 block"
+                    >
+                      {studio.contact.phone}
+                    </a>
+                  </div>
+                </Container>
+              </div>
+            </details>
+          </div>
         </div>
       </Container>
 

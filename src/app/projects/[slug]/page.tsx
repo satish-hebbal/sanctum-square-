@@ -69,7 +69,14 @@ export default async function ProjectPage({ params }: Params) {
     <article>
       {/* Hero runs to the full width of the viewport, past the page gutter. */}
       <Figure
-        figure={project.hero}
+        figure={
+          // Where a project carries a plan, show it here over its own
+          // photograph rather than the photograph alone — matching the
+          // home page's featured treatment.
+          project.heroOverlay
+            ? { ...project.heroOverlay, backdrop: project.hero.media }
+            : project.hero
+        }
         ratio={isDrawing ? "landscape" : "hero"}
         sizes={SIZES.viewport}
         priority

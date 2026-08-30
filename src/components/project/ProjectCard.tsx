@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Figure } from "@/components/media/Figure";
-import { Eyebrow } from "@/components/ui/primitives";
+import { Eyebrow, StatusDot } from "@/components/ui/primitives";
 import { cx } from "@/lib/cx";
 import type { Project } from "@/lib/types";
 
@@ -41,8 +41,10 @@ export function ProjectCard({
 
         <Eyebrow className="mt-5">{project.eyebrow}</Eyebrow>
         <Title className="text-section mt-2">{project.title}</Title>
-        <p className="text-small mt-1 text-graphite">
-          {project.location} · {project.status}
+        <p className="text-small mt-1 flex items-center gap-1.5 text-graphite">
+          {project.location} ·
+          {project.status === "Ongoing" && <StatusDot />}
+          {project.status}
         </p>
       </Link>
     </article>

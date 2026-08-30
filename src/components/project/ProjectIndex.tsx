@@ -41,8 +41,10 @@ export function ProjectIndex({ projects }: { projects: Project[] }) {
                   onClick={() => setActive(category)}
                   aria-pressed={selected}
                   className={cx(
-                    "text-nav px-1 py-2 uppercase transition-colors duration-300",
-                    selected ? "text-ink" : "text-graphite hover:text-ink",
+                    "text-nav bg-[linear-gradient(currentColor,currentColor)] bg-position-[0_100%] bg-no-repeat px-1 py-2 uppercase transition-[background-size,color] duration-300 ease-(--ease-out-quint)",
+                    selected
+                      ? "bg-[length:100%_1px] text-ink"
+                      : "bg-[length:0%_1px] text-graphite hover:text-ink",
                   )}
                 >
                   {category ?? "All"}

@@ -251,6 +251,19 @@ export function Button({
  * Label / value rows separated by hairlines. Used for project facts, the
  * founder's credits and the office addresses, so all three read alike.
  */
+/** A small rippling dot marking a live/in-progress state. */
+export function StatusDot({ className }: { className?: string }) {
+  return (
+    <span
+      className={cx("relative inline-flex size-1.5", className)}
+      aria-hidden
+    >
+      <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+      <span className="relative inline-flex size-1.5 rounded-full bg-emerald-500" />
+    </span>
+  );
+}
+
 export function DataList({
   items,
   className,
@@ -268,7 +281,12 @@ export function DataList({
           <dt className="text-eyebrow pt-1 text-graphite uppercase">
             {item.label}
           </dt>
-          <dd className="text-body">{item.value}</dd>
+          <dd className="text-body flex items-center gap-2">
+            {item.label === "Status" && item.value === "Ongoing" && (
+              <StatusDot />
+            )}
+            {item.value}
+          </dd>
         </div>
       ))}
     </dl>

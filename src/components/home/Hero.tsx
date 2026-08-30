@@ -162,12 +162,23 @@ export function Hero({ slides }: { slides: Project[] }) {
                   aria-current={i === index}
                   className="py-3"
                 >
-                  <span
-                    className={cx(
-                      "block h-px w-7 transition-colors duration-500",
-                      i === index ? "bg-white" : "bg-white/40",
-                    )}
-                  />
+                  <span className="block h-px w-7 overflow-hidden bg-white/30">
+                    <span
+                      className={cx(
+                        "block h-full bg-white",
+                        i < index && "w-full",
+                        i >= index && "w-0",
+                      )}
+                      style={
+                        i === index
+                          ? {
+                              animation: `hero-dash-fill ${INTERVAL}ms linear forwards`,
+                              animationPlayState: paused ? "paused" : "running",
+                            }
+                          : undefined
+                      }
+                    />
+                  </span>
                 </button>
               ))}
             </div>

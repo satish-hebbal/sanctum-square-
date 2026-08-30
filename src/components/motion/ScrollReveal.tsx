@@ -264,10 +264,25 @@ export function ScrollReveal() {
 
     // Immediate on every navigation after the first; on a first load it holds
     // until the opening curtain is on its way out.
-    const unwait = whenIntroClears(start);
+    //
+    // Deferred: when no intro plays, `whenIntroClears` fires `start`
+    // synchronously inside this effect, which can run before React finishes
+    // hydrating subtrees streamed in behind this one — GSAP would then set
+    // style/attributes on nodes mid-hydration and React logs a mismatch for
+    // an entrance that hasn't actually gone wrong. Neither a single
+    // `requestAnimationFrame` nor a bare `setTimeout(fn, 0)` was reliably
+    // enough slack on this page — React's own scheduler can still have
+    // hydration work queued behind either. A short real delay gives it
+    // running room; it's still well under what a reader would notice as a
+    // late entrance.
+    let timer = 0;
+    const unwait = whenIntroClears(() => {
+      timer = window.setTimeout(start, 100);
+    });
 
     return () => {
       cancelled = true;
+      window.clearTimeout(timer);
       unwait();
       cleanup();
     };

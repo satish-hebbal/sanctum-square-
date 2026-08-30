@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, Mail, Phone } from "lucide-react";
 import { nav, studio } from "@/content/studio";
 import { socialIcons } from "@/components/ui/icons";
 import { Container, Eyebrow } from "@/components/ui/primitives";
+import { LogoMark } from "@/components/ui/LogoMark";
 
 /**
  * Site footer.
@@ -39,14 +40,7 @@ export function Footer() {
               aria-label={`${studio.name} — home`}
               className="flex items-center gap-4 transition-opacity duration-300 hover:opacity-60"
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/logo-mark.svg"
-                alt=""
-                width={34}
-                height={33}
-                className="h-8 w-auto"
-              />
+              <LogoMark className="h-8 w-auto" />
               <span className="text-[1.0625rem] leading-none font-medium tracking-[0.18em] uppercase">
                 {studio.name}
               </span>
@@ -154,7 +148,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-hairline py-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 py-8 sm:flex-row sm:items-center sm:justify-between">
           <Eyebrow>
             © {studio.legalName} {new Date().getFullYear()}
           </Eyebrow>
