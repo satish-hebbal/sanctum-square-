@@ -198,6 +198,31 @@ no autoplay on cellular.
   Content that appears without a route change — the filtered project grid —
   calls `refreshReveal()`.
 
+- **The loading state is the logo.** There is no spinner: `.logo-loader` masks
+  a sweeping gradient with the same `/logo-mark.svg` the header renders, so the
+  mark appears to draw itself while something is on its way. Two places use it,
+  because those are the two places on the site where a reader actually waits:
+  [`app/loading.tsx`](src/app/loading.tsx) covers every route change — one
+  answer to "the page is coming" for the whole site, rather than a file per
+  segment — and the enquiry form’s submit button, which is a real round trip to
+  a webhook or an email API.
+
+  It fades in on a 160ms delay. Next swaps the fallback in the instant a
+  navigation suspends, and most navigations here resolve far faster than that,
+  so an undelayed loader would strobe on every tap — which reads as a fault
+  rather than as care. Only a real wait ever becomes visible.
+
+  **Not for images.** Every photograph goes through `Figure` or `Hero` with a
+  `blurDataURL`, so a slot still loading already shows a blurred version of the
+  actual photograph. A mark on top of that would replace the better loading
+  state with a worse one and turn a quiet grid into a field of flickering
+  logos. `LoaderOverlay` in
+  [`LogoLoader.tsx`](src/components/ui/LogoLoader.tsx) exists for a frame that
+  has nothing to show at all; nothing needs it yet.
+
+  Under `prefers-reduced-motion` the band stops travelling and the mark
+  breathes instead — a frozen loader tells a reader nothing.
+
 ### Autoplay runs under prefers-reduced-motion too
 
 The home page hero used to stop advancing entirely for a reader with

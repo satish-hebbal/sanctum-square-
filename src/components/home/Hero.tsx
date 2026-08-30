@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import NextImage from "next/image";
 
@@ -14,20 +14,39 @@ const INTERVAL = 6000;
 
 export function Hero({ slides }: { slides: Project[] }) {
   const [index, setIndex] = useState(0);
+  // The slide being faded out. It keeps its pan running until the crossfade
+  // finishes; dropping the animation the instant it stops being current would
+  // snap the image back to its resting frame in full view.
+  const [leaving, setLeaving] = useState<number | null>(null);
   // Only slides that have been reached are mounted. Stacking all six would put
   // every one of them in the viewport at once, which defeats lazy loading and
   // costs a phone five images it may never see.
   const [mounted, setMounted] = useState(1);
   const [paused, setPaused] = useState(false);
 
+  const indexRef = useRef(0);
+
   const go = useCallback(
     (next: number) => {
       const i = (next + slides.length) % slides.length;
+      if (i === indexRef.current) return;
+      setLeaving(indexRef.current);
+      indexRef.current = i;
       setIndex(i);
       setMounted((m) => Math.max(m, i + 1));
     },
     [slides.length],
   );
+
+  // Let go of the outgoing slide once it has finished fading, so that its pan
+  // class is off it again before its next turn — otherwise the class would
+  // never be re-added and the slide would come back already at the end of its
+  // travel, sitting still.
+  useEffect(() => {
+    if (leaving === null) return;
+    const t = window.setTimeout(() => setLeaving(null), 1000);
+    return () => window.clearTimeout(t);
+  }, [leaving]);
 
   useEffect(() => {
     // Warm the second slide once the page is idle so the first advance does
@@ -80,17 +99,30 @@ export function Hero({ slides }: { slides: Project[] }) {
               i === index ? "opacity-100" : "opacity-0",
             )}
           >
-            <NextImage
-              src={record.src}
-              alt={project.hero.alt}
-              fill
-              sizes={SIZES.viewport}
-              quality={IMAGE_QUALITY}
-              priority={i === 0}
-              placeholder="blur"
-              blurDataURL={record.blurDataURL}
-              className="object-cover"
-            />
+            {/*
+              The pan class is added only when a slide takes over, so React
+              removing and re-adding it is what restarts the animation from the
+              beginning on every appearance — a slide that kept the class would
+              sit at the end of its travel, motionless, the second time round.
+            */}
+            <div
+              className={cx(
+                "relative h-full w-full",
+                (i === index || i === leaving) && "hero-pan",
+              )}
+            >
+              <NextImage
+                src={record.src}
+                alt={project.hero.alt}
+                fill
+                sizes={SIZES.viewport}
+                quality={IMAGE_QUALITY}
+                priority={i === 0}
+                placeholder="blur"
+                blurDataURL={record.blurDataURL}
+                className="object-cover"
+              />
+            </div>
           </div>
         );
       })}

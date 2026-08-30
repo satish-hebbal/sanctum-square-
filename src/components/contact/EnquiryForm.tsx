@@ -4,6 +4,7 @@ import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
 import { submitEnquiry, type EnquiryState } from "@/app/contact/actions";
+import { LogoLoader } from "@/components/ui/LogoLoader";
 import { Button } from "@/components/ui/primitives";
 import { budgetRanges, projectTypes, studio } from "@/content/studio";
 import { cx } from "@/lib/cx";
@@ -86,11 +87,26 @@ function Select({
   );
 }
 
+/**
+ * Sending is the one genuine wait on the site — a webhook or an email API
+ * round trip — so it is the one place a loader belongs. The button dims less
+ * than a plain disabled control would: it is busy, not unavailable, and the
+ * mark has to stay readable on the ink while it works.
+ */
 function Submit() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" disabled={pending}>
-      {pending ? "Sending" : "Send enquiry"}
+    <Button type="submit" disabled={pending} className="gap-3 disabled:opacity-70">
+      {pending ? (
+        <>
+          {/* Decorative: the label beside it already announces the state, and
+              a labelled status here would join the button’s accessible name. */}
+          <LogoLoader size="sm" tone="paper" label={null} />
+          Sending
+        </>
+      ) : (
+        "Send enquiry"
+      )}
     </Button>
   );
 }

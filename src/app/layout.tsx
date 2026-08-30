@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 
 import { Footer } from "@/components/chrome/Footer";
 import { Header } from "@/components/chrome/Header";
+import { Intro } from "@/components/motion/Intro";
 import { ScrollReveal } from "@/components/motion/ScrollReveal";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 import { studio } from "@/content/studio";
@@ -67,7 +68,7 @@ export default function RootLayout({
           markup out of step, which is a hydration error on every page.
         */}
         <noscript>
-          <style>{`:root{--reveal-fallback-delay:0s}`}</style>
+          <style>{`:root{--reveal-fallback-delay:0s}.intro-curtain{display:none}`}</style>
         </noscript>
       </head>
       <body>
@@ -78,6 +79,13 @@ export default function RootLayout({
           Skip to content
         </a>
 
+        {/*
+          Before ScrollReveal: the opening reveal announces itself in a layout
+          effect, which React flushes ahead of every passive effect, so the
+          reveals know to hold whichever order these sit in. Reading top to
+          bottom in the order they play is simply clearer.
+        */}
+        <Intro />
         <SmoothScroll />
         <ScrollReveal />
 

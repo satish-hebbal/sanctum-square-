@@ -3,11 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
 
 import { nav, studio } from "@/content/studio";
 import { cx } from "@/lib/cx";
-import { Container } from "@/components/ui/primitives";
+import { ArrowNE, Container } from "@/components/ui/primitives";
 
 function isActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -35,6 +34,25 @@ export function Header() {
   const pathname = usePathname();
   const detailsRef = useRef<HTMLDetailsElement>(null);
   const [open, setOpen] = useState(false);
+  /**
+   * Bumped on every open, and used as a `key` on the panel's contents so React
+   * builds the list from scratch each time.
+   *
+   * The staggered entrance is a CSS animation keyed off `[open]`, and it stops
+   * replaying once the menu has been closed by *navigating* from it — tapping
+   * a link rather than the close button, which is what visitors actually do.
+   * After that, reopening creates the animations already in a `finished`
+   * state: no `animationstart` fires, and the items simply appear. The closed
+   * state is correct (`display: none`, animations cancelled), so this is
+   * Chrome holding stale animation state on the reused <li> nodes rather than
+   * anything the markup can express.
+   *
+   * New nodes cannot carry stale state, so this sidesteps it outright. It
+   * costs four list items and two links per open, and it leaves the no-script
+   * path exactly as it was: the animation is still pure CSS, still keyed off
+   * `[open]`, and this only ever improves it.
+   */
+  const [session, setSession] = useState(0);
 
   const close = useCallback(() => {
     if (detailsRef.current) detailsRef.current.open = false;
@@ -72,13 +90,20 @@ export function Header() {
   }, [open, close]);
 
   return (
-    <header className="sticky top-0 z-50 bg-paper">
+    <header className="sticky top-0 z-50 bg-paper" data-intro-header>
       <Container>
         <div className="flex h-16 items-center justify-between sm:h-22">
+          {/*
+            The opening reveal animates this exact element from the middle of
+            the screen into place — see components/motion/Intro.tsx. It is
+            measured where it already sits, so the landing needs no numbers
+            of its own and nothing here has to be kept in sync with it.
+          */}
           <Link
             href="/"
             className="flex items-center gap-3 sm:gap-4"
             aria-label={`${studio.name} — home`}
+            data-intro-lockup
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -87,8 +112,9 @@ export function Header() {
               width={34}
               height={33}
               className="h-7 w-auto sm:h-8"
+              data-intro-mark
             />
-            <span className="flex flex-col">
+            <span className="flex flex-col" data-intro-word>
               <span className="text-[0.9375rem] leading-none font-medium tracking-[0.18em] uppercase sm:text-[1.0625rem]">
                 {studio.name}
               </span>
@@ -98,7 +124,7 @@ export function Header() {
             </span>
           </Link>
 
-          <nav aria-label="Primary" className="hidden md:block">
+          <nav aria-label="Primary" className="hidden md:block" data-intro-chrome>
             <ul className="flex items-center gap-10">
               {nav.map((item) => (
                 <li key={item.href}>
@@ -124,7 +150,12 @@ export function Header() {
           <details
             ref={detailsRef}
             className="site-menu md:hidden"
-            onToggle={(e) => setOpen((e.currentTarget as HTMLDetailsElement).open)}
+            data-intro-chrome
+            onToggle={(e) => {
+              const isOpen = (e.currentTarget as HTMLDetailsElement).open;
+              setOpen(isOpen);
+              if (isOpen) setSession((n) => n + 1);
+            }}
           >
             {/*
               A 44px target, held off the right edge — flush against it on iOS
@@ -135,25 +166,27 @@ export function Header() {
               aria-label="Menu"
               className="flex size-11 cursor-pointer touch-manipulation items-center justify-center select-none"
             >
-              <Menu
-                size={22}
-                strokeWidth={1.25}
-                aria-hidden
-                className="site-menu-closed"
-              />
-              <X
-                size={22}
-                strokeWidth={1.25}
-                aria-hidden
-                className="site-menu-open"
-              />
+              {/*
+                Three bars rather than two icons swapped over, so the control
+                folds into the cross instead of cutting to it. Drawn here in
+                spans because it has to animate: lucide gives back finished
+                SVG paths, and a Menu glyph cannot become an X glyph.
+              */}
+              <span className="menu-icon" aria-hidden>
+                <span />
+                <span />
+                <span />
+              </span>
             </summary>
 
             <div
               id="site-menu"
               className="fixed inset-x-0 top-16 bottom-0 z-40 overflow-y-auto overscroll-contain bg-paper sm:top-22"
             >
-              <Container className="flex min-h-full flex-col justify-between gap-(--spacing-block) py-(--spacing-block)">
+              <Container
+                key={session}
+                className="flex min-h-full flex-col justify-between gap-(--spacing-block) py-(--spacing-block)"
+              >
                 <nav aria-label="Primary">
                   <ul>
                     {nav.map((item) => (
@@ -168,13 +201,14 @@ export function Header() {
                             isActive(pathname, item.href) ? "page" : undefined
                           }
                           className={cx(
-                            "text-project block py-5",
+                            "text-project flex items-center justify-between gap-4 py-5",
                             isActive(pathname, item.href)
                               ? "text-ink"
                               : "text-graphite",
                           )}
                         >
                           {item.label}
+                          <ArrowNE className="size-[0.55em]" />
                         </Link>
                       </li>
                     ))}
@@ -198,7 +232,7 @@ export function Header() {
         </div>
       </Container>
 
-      <div className="h-px w-full bg-hairline" />
+      <div className="h-px w-full bg-hairline" data-intro-chrome />
     </header>
   );
 }

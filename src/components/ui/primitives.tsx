@@ -153,11 +153,32 @@ export function PageHeader({
 
 /**
  * Text link whose rule retracts to the right and redraws from the left on
- * hover. No colour change, no icon — the underline carries the affordance.
+ * hover. No colour change — the underline and a north-east arrow carry the
+ * affordance.
  *
  * Sized as a plain inline-block: an inline-flex box here shrinks to its
  * min-content and breaks two-word labels across lines.
  */
+/**
+ * North-east arrow. Sized in `em` so it tracks whatever type it sits in, and
+ * drawn in `currentColor` so it inherits the link's colour rather than
+ * introducing one of its own.
+ */
+export function ArrowNE({ className }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden
+      viewBox="0 0 12 12"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.25"
+      className={cx("inline-block size-[0.7em] align-baseline", className)}
+    >
+      <path d="M2 10 10 2M4 2h6v6" />
+    </svg>
+  );
+}
+
 export function TextLink({
   href,
   children,
@@ -172,6 +193,7 @@ export function TextLink({
   const inner = (
     <span className="text-section relative inline-block pb-2 whitespace-nowrap">
       {children}
+      <ArrowNE className="ml-2" />
       <span
         aria-hidden
         className="absolute inset-x-0 bottom-0 h-px origin-right scale-x-100 bg-ink transition-transform duration-300 ease-(--ease-out-quint) group-hover:scale-x-0"
