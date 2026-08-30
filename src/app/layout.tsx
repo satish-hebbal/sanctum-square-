@@ -23,8 +23,11 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+// `||`, not `??`: Vercel's import UI sets an env var it collected an empty
+// value for to `""` rather than leaving it unset, and `"" ?? fallback` is
+// still `""` — which crashes `new URL()` below.
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.sanctumsquare.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.sanctumsquare.com";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
