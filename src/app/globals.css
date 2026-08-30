@@ -1,0 +1,508 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Sanctum Square — design tokens
+   Gallery-white, image-first, editorial. No colour accents, no radii,
+   no shadows. Hairlines do the structural work.
+   Values mirror the Figma library (00 · Style Guide) one for one.
+--------------------------------------------------------------------------- */
+
+@theme {
+  /* Surface + ink ------------------------------------------------------- */
+  /* Warm off-white rather than screen white. The photography is heavily
+     warm — wood, lamplight, sunset renders — and a cold ground fought it.
+     Holds 18.3:1 against ink and stays clearly separated from `stone`
+     (ΔE 4.3), which is the frame colour behind every image. */
+  --color-paper: #fffdf7;
+  --color-stone: #f3f2f0;
+  --color-ink: #131313;
+  --color-graphite: #6b6b6b;
+  --color-hairline: #e2e2e2;
+  --color-placeholder: #d6d3ce;
+  --color-placeholder-dark: #b9b5ae;
+
+  /* Typeface ------------------------------------------------------------ */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+
+  /* Type scale ---------------------------------------------------------- *
+   * Fluid between the two artboard widths in Figma: 390 and 1440. Every
+   * ramp is one token, so a size never has to be re-guessed per breakpoint.
+   * Sizes at or below 15px stay fixed — fluid body text hurts legibility.  */
+
+  --text-hero: clamp(2.5rem, 2.0357rem + 1.9048vw, 3.75rem); /* 40 → 60 */
+  --text-hero--line-height: 1.05;
+  --text-hero--letter-spacing: -0.023em;
+  --text-hero--font-weight: 300;
+
+  --text-title: clamp(2rem, 1.7214rem + 1.1429vw, 2.75rem); /* 32 → 44 */
+  --text-title--line-height: 1.12;
+  --text-title--letter-spacing: -0.023em;
+  --text-title--font-weight: 300;
+
+  --text-statement: clamp(1.25rem, 1.0643rem + 0.7619vw, 1.75rem); /* 20 → 28 */
+  --text-statement--line-height: 1.43;
+  --text-statement--letter-spacing: -0.011em;
+  --text-statement--font-weight: 300;
+
+  --text-project: clamp(1.5rem, 1.3143rem + 0.7619vw, 2rem); /* 24 → 32 */
+  --text-project--line-height: 1.25;
+  --text-project--letter-spacing: -0.019em;
+  --text-project--font-weight: 300;
+
+  --text-section: clamp(1.125rem, 1.0786rem + 0.1905vw, 1.25rem); /* 18 → 20 */
+  --text-section--line-height: 1.4;
+  --text-section--letter-spacing: -0.01em;
+  --text-section--font-weight: 400;
+
+  --text-lead: clamp(1rem, 0.9536rem + 0.1905vw, 1.125rem); /* 16 → 18 */
+  --text-lead--line-height: 1.667;
+  --text-lead--letter-spacing: 0em;
+  --text-lead--font-weight: 300;
+
+  --text-body: 0.9375rem; /* 15 */
+  --text-body--line-height: 1.733;
+  --text-body--letter-spacing: 0em;
+  --text-body--font-weight: 400;
+
+  --text-small: 0.8125rem; /* 13 */
+  --text-small--line-height: 1.692;
+  --text-small--letter-spacing: 0em;
+  --text-small--font-weight: 400;
+
+  --text-caption: 0.75rem; /* 12 */
+  --text-caption--line-height: 1.5;
+  --text-caption--letter-spacing: 0.017em;
+  --text-caption--font-weight: 400;
+
+  --text-eyebrow: 0.6875rem; /* 11 */
+  --text-eyebrow--line-height: 1.4545;
+  --text-eyebrow--letter-spacing: 0.118em;
+  --text-eyebrow--font-weight: 500;
+
+  --text-nav: 0.75rem; /* 12 */
+  --text-nav--line-height: 1.333;
+  --text-nav--letter-spacing: 0.075em;
+  --text-nav--font-weight: 400;
+
+  /* Layout -------------------------------------------------------------- *
+   * Figma desktop grid: 1440 canvas · 60px margins · 12 cols · 33px gutter. */
+  --spacing-gutter: clamp(1.25rem, 0.3214rem + 3.8095vw, 3.75rem); /* 20 → 60 */
+  --spacing-col-gap: clamp(1rem, 0.6905rem + 1.2698vw, 2.0625rem); /* 16 → 33 */
+
+  /* Vertical rhythm. Three steps only — anything else invents a value. */
+  --spacing-block: clamp(3rem, 2.2857rem + 2.9286vw, 4.9375rem); /* 48 → 79 */
+  --spacing-section: clamp(4.5rem, 3.2857rem + 4.9762vw, 7.75rem); /* 72 → 124 */
+  --spacing-page: clamp(6rem, 4.2857rem + 7.0286vw, 10.625rem); /* 96 → 170 */
+
+  --container-page: 1440px;
+
+  /* Motion. One duration ramp, one easing. */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: auto; /* Lenis owns scrolling */
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis-weight: none;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Lenis is initialised client-side; until it is, keep native scrolling. */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  :focus-visible {
+    outline: 1px solid var(--color-ink);
+    outline-offset: 3px;
+  }
+
+  img,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Motion primitives
+   Elements opt in by carrying a data-reveal attribute. GSAP takes over on
+   mount; these rules are the pre-JS resting state, so nothing flashes.
+--------------------------------------------------------------------------- */
+
+@layer components {
+  /**
+   * Mobile menu, built on a native <details> so it toggles before hydration.
+   * These rules do the icon swap and strip the default disclosure marker, so
+   * the whole control works with no JavaScript at all.
+   */
+  .site-menu > summary {
+    list-style: none;
+  }
+
+  .site-menu > summary::-webkit-details-marker,
+  .site-menu > summary::marker {
+    display: none;
+    content: "";
+  }
+
+  .site-menu > summary .site-menu-open,
+  .site-menu[open] > summary .site-menu-closed {
+    display: none;
+  }
+
+  .site-menu[open] > summary .site-menu-open {
+    display: block;
+  }
+
+  /**
+   * Opening reveal. The panel wipes down from under the bar, then the items
+   * rise in behind it, one after the next.
+   *
+   * Pure CSS, keyed off the [open] attribute, so it plays whether or not the
+   * JavaScript has arrived — the same reason the menu is a <details> in the
+   * first place. Closing is immediate and deliberately so: an exit animation
+   * would need JS to hold the element open while it played, and a menu that
+   * hesitates on the way out feels slow rather than considered.
+   */
+  /**
+   * Closed state must be `display: none`, not merely unrendered.
+   *
+   * A closed <details> hides its content with `content-visibility: hidden` in
+   * current Chrome, which keeps the subtree on the animation timeline — the
+   * reveal below therefore ran once, finished, and held its end state, so
+   * every reopen after the first appeared instantly with no animation at all.
+   * `display: none` cancels running animations outright, so reopening starts
+   * them from the beginning every time.
+   */
+  .site-menu:not([open]) > #site-menu {
+    display: none;
+  }
+
+  .site-menu[open] > #site-menu {
+    animation: menu-panel 260ms var(--ease-out-quint) both;
+    transform-origin: top center;
+  }
+
+  .site-menu[open] .site-menu-item,
+  .site-menu[open] .site-menu-foot {
+    animation: menu-item 380ms var(--ease-out-quint) both;
+  }
+
+  /* 45ms apart: enough to read as a cascade, not enough to wait on. */
+  .site-menu[open] .site-menu-item:nth-child(1) {
+    animation-delay: 90ms;
+  }
+  .site-menu[open] .site-menu-item:nth-child(2) {
+    animation-delay: 135ms;
+  }
+  .site-menu[open] .site-menu-item:nth-child(3) {
+    animation-delay: 180ms;
+  }
+  .site-menu[open] .site-menu-item:nth-child(4) {
+    animation-delay: 225ms;
+  }
+  .site-menu[open] .site-menu-foot {
+    animation-delay: 270ms;
+  }
+}
+
+@keyframes menu-panel {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes menu-item {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer components {
+  /**
+   * Hero scrim.
+   *
+   * The caption is white type sitting on whatever photograph happens to be
+   * showing, and some of them — a lit timber wall, a pale interior — are far
+   * too bright to read against. This carries it.
+   *
+   * The stops approximate an eased falloff rather than a straight ramp. A
+   * two-stop linear gradient leaves a visible edge partway up the image, which
+   * on a gallery-white site looks like a mistake; easing it out makes the
+   * darkening read as light in the room instead of a panel laid over the top.
+   *
+   * Weighted harder on small screens, where the type is proportionally larger
+   * and sits over less image.
+   */
+  .hero-scrim {
+    background: linear-gradient(
+      to top,
+      rgb(0 0 0 / 0.82) 0%,
+      rgb(0 0 0 / 0.74) 14%,
+      rgb(0 0 0 / 0.58) 30%,
+      rgb(0 0 0 / 0.4) 46%,
+      rgb(0 0 0 / 0.22) 62%,
+      rgb(0 0 0 / 0.08) 80%,
+      transparent 100%
+    );
+  }
+
+  @media (min-width: 768px) {
+    .hero-scrim {
+      background: linear-gradient(
+        to top,
+        rgb(0 0 0 / 0.72) 0%,
+        rgb(0 0 0 / 0.6) 14%,
+        rgb(0 0 0 / 0.44) 32%,
+        rgb(0 0 0 / 0.26) 50%,
+        rgb(0 0 0 / 0.12) 70%,
+        transparent 100%
+      );
+    }
+  }
+
+  /**
+   * Hero height.
+   *
+   * `svh` is the right unit here — it is the viewport with the browser chrome
+   * showing, so the hero does not resize as the address bar hides and the page
+   * does not judder mid-scroll. But Safari only learned it in 15.4, and a
+   * browser that does not understand the declaration drops it entirely, which
+   * would leave the hero with no height at all: its children are absolutely
+   * positioned, so it would collapse to nothing.
+   *
+   * The `vh` line before it is the fallback every browser understands, and the
+   * min-height is the floor for a short landscape window.
+   */
+  .hero-height {
+    height: 68vh;
+    height: 68svh;
+    /* A floor for tall screens, but never taller than the screen itself —
+       a phone held sideways is only ~390px high, and a fixed 27.5rem floor
+       would push the project caption off the bottom of it. */
+    min-height: min(27.5rem, 80vh);
+  }
+
+  @media (min-width: 768px) {
+    .hero-height {
+      height: 78vh;
+      height: 78svh;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Reveal resting state.
+
+     The hide and the reveal must not depend on different things. An earlier
+     version hid content with CSS the instant the page painted but only
+     revealed it once a ~70KB GSAP bundle had downloaded and run — so on a
+     slow connection the whole page sat blank, and if that request ever
+     failed it stayed blank.
+
+     So the hide now expires on its own. Each target carries a delayed CSS
+     animation that ends in the visible state; if the script never arrives,
+     the page reveals itself a moment later with no JavaScript at all. When
+     GSAP does arrive in time it stamps `data-reveal-claimed`, which cancels
+     the animation and hands control over. Nothing here can outlive its own
+     reveal.
+  --------------------------------------------------------------------- */
+  [data-reveal] {
+    opacity: 0;
+    animation: reveal-fallback 600ms var(--ease-out-quint)
+      var(--reveal-fallback-delay, 1200ms) both;
+  }
+
+  [data-reveal="up"] {
+    transform: translate3d(0, 1.25rem, 0);
+  }
+
+  [data-reveal="mask"] > * {
+    transform: scale(1.06);
+    animation: reveal-mask-fallback 900ms var(--ease-out-quint)
+      var(--reveal-fallback-delay, 1200ms) both;
+  }
+
+  /* GSAP got here first and owns these from now on. */
+  [data-reveal][data-reveal-claimed],
+  [data-reveal][data-reveal-claimed] > * {
+    animation: none;
+  }
+}
+
+@keyframes reveal-fallback {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes reveal-mask-fallback {
+  to {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Loading
+--------------------------------------------------------------------------- */
+
+@layer components {
+  /**
+   * Logo loader.
+   *
+   * The mark *is* the loader. `mask-image` punches the logo out of a plain
+   * box and what animates is a gradient sweeping behind it, so the site never
+   * has to own a spinner — a second piece of brand vocabulary, drawn by
+   * nobody, that would look borrowed next to this mark.
+   *
+   * The mask is the same `/logo-mark.svg` the header already renders, so it
+   * is in cache before any loader can appear and the file stays the single
+   * place the mark is defined. A mask source must be same-origin; this is.
+   *
+   * Size comes in through `--logo-loader-size`. The ratio is the SVG's own
+   * 34 x 33, so height is never restated and the box cannot go out of shape.
+   */
+  .logo-loader {
+    display: block;
+    width: var(--logo-loader-size, 2.5rem);
+    aspect-ratio: 34 / 33;
+
+    /* One darker band travelling through a flat base. Its edges sit exactly
+       on the thirds the box can show — 34% and 66% of an image three times
+       the width — so each cycle begins and ends on flat colour and the loop
+       has no visible seam. */
+    background-image: linear-gradient(
+      100deg,
+      var(--color-placeholder) 34%,
+      var(--color-ink) 50%,
+      var(--color-placeholder) 66%
+    );
+    background-repeat: no-repeat;
+    background-size: 300% 100%;
+    animation: logo-loader-sweep 1.6s linear infinite;
+
+    /* Longhands, not the `mask` shorthand: the shorthand also resets
+       mask-border, and prefixed WebKit is more reliable told one property at
+       a time. Both spellings ship — iOS is most of this audience. */
+    -webkit-mask-image: url("/logo-mark.svg");
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    mask-image: url("/logo-mark.svg");
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+  }
+}
+
+@keyframes logo-loader-sweep {
+  /* A background wider than its box moves the opposite way to the number:
+     at 100% the image's right end is pinned to the box and the band is still
+     off to the left, so 100% -> 0% walks it across left to right. */
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
+
+@keyframes logo-loader-pulse {
+  50% {
+    opacity: 0.3;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  [data-reveal],
+  [data-reveal] > * {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .site-menu[open] > #site-menu,
+  .site-menu[open] .site-menu-item,
+  .site-menu[open] .site-menu-foot {
+    animation: none !important;
+  }
+
+  /**
+   * The loader is the one thing here that still has to move. Freezing it —
+   * which the blanket rule above would do — leaves a flat grey mark on screen
+   * that says nothing, and a reader who cannot tell whether the page is
+   * working will reload it.
+   *
+   * So it keeps an animation but loses the travel: a still mark that breathes,
+   * slowly enough (2.4s) that nothing about it flashes.
+   */
+  .logo-loader {
+    background-image: none;
+    background-color: var(--color-graphite);
+    animation: logo-loader-pulse 2.4s ease-in-out infinite !important;
+  }
+}

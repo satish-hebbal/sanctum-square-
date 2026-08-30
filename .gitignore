@@ -1,0 +1,22 @@
+node_modules
+.next
+out
+build
+next-env.d.ts
+*.tsbuildinfo
+
+.env*
+!.env.example
+
+.DS_Store
+Thumbs.db
+
+# The studio's original media: 58 MB of PNG and JPEG, and the input to
+# `npm run media`. Kept out of git — the encoded output in public/media is what
+# the site ships, and that IS committed, so a fresh clone builds without it.
+/assets/source
+
+# Source documents dropped in for reference (project PDFs, the studio profile
+# deck). Same reasoning as assets/source: what the site ships is derived from
+# these, not these themselves. Keep a copy somewhere durable.
+/res

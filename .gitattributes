@@ -1,0 +1,17 @@
+# Normalise line endings so the repo is identical regardless of the OS it was
+# committed from. Without this, Windows CRLF files land in the repo verbatim
+# and every checkout on macOS or Linux shows a whole-file diff.
+* text=auto eol=lf
+
+# Binary assets — never touch these.
+*.webp binary
+*.jpg  binary
+*.jpeg binary
+*.png  binary
+*.mp4  binary
+*.woff binary
+*.woff2 binary
+
+# Generated: keep it out of diffs and language stats.
+src/content/media.generated.ts linguist-generated=true
+package-lock.json             linguist-generated=true
