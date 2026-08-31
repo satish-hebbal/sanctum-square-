@@ -35,7 +35,6 @@ export function ProjectCard({
             priority={priority}
             showCaption={false}
             reveal={false}
-            className="[&_img]:transition-transform [&_img]:duration-700 [&_img]:ease-(--ease-out-quint) group-hover:[&_img]:scale-[1.03]"
           />
         </div>
 

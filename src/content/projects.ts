@@ -8,6 +8,7 @@ import type { Project } from "@/lib/types";
 export const projects: Project[] = [
   {
     slug: "mantra-residency",
+    featured: 3,
     title: "Mantra Residency",
     category: "Hospitality",
     eyebrow: "Hospitality · Renovation",
@@ -101,81 +102,6 @@ export const projects: Project[] = [
         alt: "The full frontage after dark, the restaurant signage and vertical fins lit along the length of the building.",
       },
     ],
-  },
-
-  {
-    slug: "igatpuri-hills-township",
-    title: "Igatpuri Hills Township",
-    category: "Urban Planning",
-    eyebrow: "Urban Planning",
-    location: "Igatpuri, Maharashtra",
-    status: "Ongoing",
-    featured: 1,
-    summary:
-      "A contour-sensitive master plan across about 90 acres, laying out 657 plots for luxury second homes along the site's existing topography.",
-    lede: "This township at Igatpuri is being developed as a contour-sensitive master plan that responds to the site's natural topography. The layout follows the existing contours to minimise earthwork, preserve the landscape and promote sustainable development, integrating residential, recreational, commercial and community spaces alongside circulation, infrastructure and environmental conservation.",
-    facts: [
-      { label: "Type", value: "Township master plan" },
-      { label: "Location", value: "Igatpuri, Maharashtra" },
-      { label: "Status", value: "Ongoing" },
-      { label: "Site", value: "About 90 acres" },
-      { label: "Plots", value: "657 residential" },
-      { label: "Collaboration", value: "Deepak Hiremath & Associates" },
-      { label: "Scope", value: "Land use · Zoning · Road hierarchy" },
-    ],
-    hero: {
-      media: "igatpuri/aerial-view",
-      alt: "Aerial visualization of the Igatpuri Hills township, its terraced residential blocks curving around a central lake with wooded hills and a waterfall behind.",
-      caption: "Aerial visualization",
-    },
-    // Orientation at a glance over the hero photo. The full drawing, sized to
-    // actually be read, is repeated as a section figure below.
-    heroOverlay: {
-      media: "igatpuri/master-plan-igt-23-04-26-4-17-page",
-      alt: "Site plan",
-      caption: "Site plan",
-      fit: "contain",
-    },
-    sections: [
-      {
-        title: "Master plan",
-        body: [
-          "The master plan translates the site's contours directly into the layout: plot boundaries, roads and green corridors are drawn to follow the existing landform rather than override it.",
-        ],
-        figures: [
-          {
-            media: "igatpuri/master-plan-igt-23-04-26-4-17-page",
-            alt: "The Igatpuri Hills master plan drawing, showing plot zoning, green corridors and the contour-following road network.",
-            caption: "Master plan",
-            fit: "contain",
-            backdrop: "igatpuri/aerial-view",
-          },
-        ],
-      },
-      {
-        title: "Design objectives",
-        body: [
-          "The objective is a sustainable township that works in harmony with the natural terrain while maximising the site's development potential. The planning minimises cut-and-fill operations, protects environmentally sensitive areas, and establishes a balanced relationship between built space and open landscape.",
-          "Roads, utilities and public amenities are aligned with the natural contours to ensure efficient drainage, safe accessibility and long-term sustainability.",
-        ],
-      },
-      {
-        title: "Planning features",
-        body: [
-          "The township is zoned around residential villas, waterfront villas and condominiums positioned to take the scenic views and respond to the contours. A centrally located club house serves as the social and recreational hub, supported by a sports complex and golf course.",
-          "Landscaped promenades, parks and green zones preserve open space, while dedicated amenity areas and a sales and marketing office serve residents and visitors. Ecologically sensitive zones have been identified and left intact.",
-          "Internal roads, pedestrian pathways, utility corridors and stormwater drainage all follow the contour network, reducing earthwork and maintaining the site's natural drainage pattern.",
-        ],
-      },
-      {
-        title: "Land use and road hierarchy",
-        body: [
-          "Land is allocated across plots (48.15%), roads (26.45%), amenity area (14.59%), green area (10.32%) and wastage (0.49%). The residential layout comprises 657 plots excluding the sales lounge, ranging from below 150 sq.m to above 300 sq.m.",
-          "The internal road network is set by length: a 15 m right of way for roads over 300 m, 12 m between 150 m and 300 m, and 9 m up to 150 m. The hierarchy provides vehicular circulation, emergency access and utility corridors while minimising disturbance to the terrain.",
-        ],
-      },
-    ],
-    gallery: [],
   },
 
   {
@@ -443,6 +369,7 @@ export const projects: Project[] = [
 
   {
     slug: "prakash-kore-residence",
+    featured: 2,
     title: "Prakash Kore Residence",
     category: "Residential",
     eyebrow: "Residential · Architecture",
@@ -509,7 +436,6 @@ export const projects: Project[] = [
     eyebrow: "Interiors · Residential",
     location: "Bengaluru, Karnataka",
     status: "Ongoing",
-    featured: 2,
     summary:
       "Contemporary interiors around a double-height entrance wall, teak joinery and a bay window seat in the bedroom.",
     lede: "This residential interior project in Bengaluru is envisioned as a blend of contemporary elegance and traditional warmth. The approach creates sophisticated, functional and timeless living spaces through natural materials, refined detailing and balanced proportion.",
@@ -582,12 +508,12 @@ export const projects: Project[] = [
 
   {
     slug: "rajashekar-umarani-residence",
+    featured: 1,
     title: "Rajashekar Umarani Residence",
     category: "Interiors",
     eyebrow: "Interiors · Residential",
     location: "Hubli, Karnataka",
     status: "Ongoing",
-    featured: 4,
     summary:
       "Contemporary interiors built on decorative wall moulding, wooden textures and integrated lighting across every room.",
     lede: "The Rajashekar Umarani Residence is an ongoing interior project focused on a modern, elegant and functional home. It combines clean lines, warm materials, decorative wall treatments and integrated lighting, following a contemporary and minimal aesthetic where neutral tones, wooden textures and subtle detailing carry the warmth.",
@@ -687,12 +613,12 @@ export const projects: Project[] = [
 
   {
     slug: "sanctum-square-office",
+    featured: 4,
     title: "Sanctum Square Office",
     category: "Commercial",
     eyebrow: "Commercial · Interiors",
     location: "Hubli, Karnataka",
     status: "Completed",
-    featured: 3,
     summary:
       "The studio's own office, organised into four zones — workspace, waiting, meeting and cabin — in one consistent language.",
     lede: "Sanctum Square Office is the studio's own office, designed as a professional, functional and contemporary work environment. The planning makes the available space efficient while creating a comfortable and visually refined atmosphere for daily work and client meetings.",
@@ -770,6 +696,7 @@ export const projects: Project[] = [
 
   {
     slug: "residential-extension",
+    featured: 5,
     title: "Residential Extension",
     category: "Residential",
     eyebrow: "Residential · Extension",
@@ -862,23 +789,11 @@ export const featuredProjects = projects
   .sort((a, b) => (a.featured ?? 0) - (b.featured ?? 0));
 
 /**
- * The home page hero cycles these, in order. Chosen for images that hold a
- * full-bleed crop with room at the foot for the caption — reorder freely, but
- * the first one is the LCP image on every visit, so keep a strong shot there.
+ * The home page hero cycles these, in order — the five projects the studio
+ * asked to lead with, and the same five the featured section below repeats.
+ * The first one is the LCP image on every visit.
  */
-export const heroSlides = [
-  "rotson-sales-lounge",
-  "prakash-kore-residence",
-  "akshays-house",
-  // Mantra sits mid-sequence rather than opening. Its night facade is the
-  // strongest image in the set, so it lands as a beat partway through instead
-  // of being the first thing every visitor sees.
-  "mantra-residency",
-  "residential-extension",
-  "triumph-salon",
-]
-  .map((slug) => bySlug.get(slug))
-  .filter((p): p is Project => Boolean(p));
+export const heroSlides = featuredProjects;
 
 /** Projects run in a loop, so the last one points back at the first. */
 export function getNextProject(slug: string) {

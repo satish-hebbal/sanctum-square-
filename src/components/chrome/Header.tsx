@@ -109,7 +109,7 @@ export function Header() {
           >
             <LogoMark className="h-7 w-auto sm:h-8" data-intro-mark />
             <span className="flex flex-col" data-intro-word>
-              <span className="text-[0.9375rem] leading-none font-medium tracking-[0.18em] uppercase sm:text-[1.0625rem]">
+              <span className="text-[0.9375rem] leading-none font-normal tracking-[0.18em] uppercase sm:text-[1.0625rem]">
                 {studio.name}
               </span>
               <span className="text-eyebrow mt-1.5 hidden text-graphite uppercase sm:block">

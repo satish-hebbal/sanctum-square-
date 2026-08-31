@@ -21,64 +21,83 @@
   --color-placeholder: #d6d3ce;
   --color-placeholder-dark: #b9b5ae;
 
-  /* Typeface ------------------------------------------------------------ */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", sans-serif;
+  /* Typeface ------------------------------------------------------------ *
+   * Calibri, per the studio. Windows machines have it; everyone else gets
+   * Carlito, which is drawn to Calibri's metrics, so the two set line for
+   * line and nothing reflows between them. See app/layout.tsx.             */
+  --font-sans: Calibri, var(--font-carlito), ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", sans-serif;
 
   /* Type scale ---------------------------------------------------------- *
    * Fluid between the two artboard widths in Figma: 390 and 1440. Every
    * ramp is one token, so a size never has to be re-guessed per breakpoint.
-   * Sizes at or below 15px stay fixed — fluid body text hurts legibility.  */
+   *
+   * The display end came down a step across the board. At 40px on a 390
+   * artboard a project title took three lines of a 335px measure and sat on
+   * top of everything near it, which is what the studio meant by the sizing
+   * not looking proportionate. Smaller display type is also the cheapest
+   * negative space there is — it opens the page up without adding a single
+   * pixel of scroll, which matters when nine readers in ten are on a phone.
+   *
+   * The reading end went the other way, up a step: Calibri has a shallower
+   * x-height than the grotesque this replaced, so the old 15px body set
+   * visibly smaller than 15px looked.
+   *
+   * Weights are 400 and 700 only. Carlito draws no light or medium, and
+   * `font-synthesis-weight: none` below means an unavailable weight is not
+   * faked — so asking for 300 here would silently render 400 on every
+   * machine without Calibri, and lighter on the Windows ones. One weight
+   * everywhere is honest and consistent.                                   */
 
-  --text-hero: clamp(2.5rem, 2.0357rem + 1.9048vw, 3.75rem); /* 40 → 60 */
-  --text-hero--line-height: 1.05;
-  --text-hero--letter-spacing: -0.023em;
-  --text-hero--font-weight: 300;
+  --text-hero: clamp(2rem, 1.5357rem + 1.9048vw, 3.25rem); /* 32 → 52 */
+  --text-hero--line-height: 1.08;
+  --text-hero--letter-spacing: -0.021em;
+  --text-hero--font-weight: 400;
 
-  --text-title: clamp(2rem, 1.7214rem + 1.1429vw, 2.75rem); /* 32 → 44 */
-  --text-title--line-height: 1.12;
-  --text-title--letter-spacing: -0.023em;
-  --text-title--font-weight: 300;
+  --text-title: clamp(1.75rem, 1.5179rem + 0.9524vw, 2.375rem); /* 28 → 38 */
+  --text-title--line-height: 1.15;
+  --text-title--letter-spacing: -0.021em;
+  --text-title--font-weight: 400;
 
-  --text-statement: clamp(1.25rem, 1.0643rem + 0.7619vw, 1.75rem); /* 20 → 28 */
-  --text-statement--line-height: 1.43;
-  --text-statement--letter-spacing: -0.011em;
-  --text-statement--font-weight: 300;
+  --text-statement: clamp(1.125rem, 0.9857rem + 0.5714vw, 1.5rem); /* 18 → 24 */
+  --text-statement--line-height: 1.5;
+  --text-statement--letter-spacing: -0.008em;
+  --text-statement--font-weight: 400;
 
-  --text-project: clamp(1.5rem, 1.3143rem + 0.7619vw, 2rem); /* 24 → 32 */
-  --text-project--line-height: 1.25;
-  --text-project--letter-spacing: -0.019em;
-  --text-project--font-weight: 300;
+  --text-project: clamp(1.3125rem, 1.15rem + 0.6667vw, 1.75rem); /* 21 → 28 */
+  --text-project--line-height: 1.28;
+  --text-project--letter-spacing: -0.016em;
+  --text-project--font-weight: 400;
 
-  --text-section: clamp(1.125rem, 1.0786rem + 0.1905vw, 1.25rem); /* 18 → 20 */
-  --text-section--line-height: 1.4;
-  --text-section--letter-spacing: -0.01em;
+  --text-section: clamp(1.0625rem, 1.0161rem + 0.1905vw, 1.1875rem); /* 17 → 19 */
+  --text-section--line-height: 1.42;
+  --text-section--letter-spacing: -0.008em;
   --text-section--font-weight: 400;
 
   --text-lead: clamp(1rem, 0.9536rem + 0.1905vw, 1.125rem); /* 16 → 18 */
-  --text-lead--line-height: 1.667;
+  --text-lead--line-height: 1.7;
   --text-lead--letter-spacing: 0em;
-  --text-lead--font-weight: 300;
+  --text-lead--font-weight: 400;
 
-  --text-body: 0.9375rem; /* 15 */
-  --text-body--line-height: 1.733;
+  --text-body: 1rem; /* 16 */
+  --text-body--line-height: 1.75;
   --text-body--letter-spacing: 0em;
   --text-body--font-weight: 400;
 
-  --text-small: 0.8125rem; /* 13 */
-  --text-small--line-height: 1.692;
+  --text-small: 0.875rem; /* 14 */
+  --text-small--line-height: 1.714;
   --text-small--letter-spacing: 0em;
   --text-small--font-weight: 400;
 
-  --text-caption: 0.75rem; /* 12 */
-  --text-caption--line-height: 1.5;
-  --text-caption--letter-spacing: 0.017em;
+  --text-caption: 0.8125rem; /* 13 */
+  --text-caption--line-height: 1.538;
+  --text-caption--letter-spacing: 0.015em;
   --text-caption--font-weight: 400;
 
   --text-eyebrow: 0.6875rem; /* 11 */
   --text-eyebrow--line-height: 1.4545;
   --text-eyebrow--letter-spacing: 0.118em;
-  --text-eyebrow--font-weight: 500;
+  --text-eyebrow--font-weight: 700;
 
   --text-nav: 0.75rem; /* 12 */
   --text-nav--line-height: 1.333;
@@ -86,14 +105,20 @@
   --text-nav--font-weight: 400;
 
   /* Layout -------------------------------------------------------------- *
-   * Figma desktop grid: 1440 canvas · 60px margins · 12 cols · 33px gutter. */
-  --spacing-gutter: clamp(1.25rem, 0.3214rem + 3.8095vw, 3.75rem); /* 20 → 60 */
+   * Figma desktop grid: 1440 canvas · 60px margins · 12 cols · 33px gutter.
+   *
+   * Opened up on the studio's note about negative space. The gutter gains a
+   * few pixels so nothing hugs the edge of a phone, and the two vertical
+   * steps gain proportionally more — the space between sections is where the
+   * page actually breathes, and it was the tightest part of the mobile
+   * layout. The column gutter is untouched: it is the Figma grid.          */
+  --spacing-gutter: clamp(1.5rem, 0.5714rem + 3.8095vw, 4rem); /* 24 → 64 */
   --spacing-col-gap: clamp(1rem, 0.6905rem + 1.2698vw, 2.0625rem); /* 16 → 33 */
 
   /* Vertical rhythm. Three steps only — anything else invents a value. */
-  --spacing-block: clamp(3rem, 2.2857rem + 2.9286vw, 4.9375rem); /* 48 → 79 */
-  --spacing-section: clamp(4.5rem, 3.2857rem + 4.9762vw, 7.75rem); /* 72 → 124 */
-  --spacing-page: clamp(6rem, 4.2857rem + 7.0286vw, 10.625rem); /* 96 → 170 */
+  --spacing-block: clamp(3.5rem, 2.7571rem + 3.0476vw, 5.5rem); /* 56 → 88 */
+  --spacing-section: clamp(5.5rem, 4.2rem + 5.3333vw, 9rem); /* 88 → 144 */
+  --spacing-page: clamp(7rem, 5.381rem + 6.6429vw, 11.5rem); /* 112 → 184 */
 
   --container-page: 1440px;
 
@@ -413,116 +438,24 @@
 }
 
 @layer components {
-  /**
-   * Hero scrim.
-   *
-   * The caption is white type sitting on whatever photograph happens to be
-   * showing, and some of them — a lit timber wall, a pale interior — are far
-   * too bright to read against. This carries it.
-   *
-   * The stops approximate an eased falloff rather than a straight ramp. A
-   * two-stop linear gradient leaves a visible edge partway up the image, which
-   * on a gallery-white site looks like a mistake; easing it out makes the
-   * darkening read as light in the room instead of a panel laid over the top.
-   *
-   * Weighted harder on small screens, where the type is proportionally larger
-   * and sits over less image.
-   */
-  .hero-scrim {
-    background: linear-gradient(
-      to top,
-      rgb(0 0 0 / 0.82) 0%,
-      rgb(0 0 0 / 0.74) 14%,
-      rgb(0 0 0 / 0.58) 30%,
-      rgb(0 0 0 / 0.4) 46%,
-      rgb(0 0 0 / 0.22) 62%,
-      rgb(0 0 0 / 0.08) 80%,
-      transparent 100%
-    );
+  .hero-frame {
+    /* The frame the lead photograph is contained in. `svh` keeps it from
+       resizing as a phone's address bar hides, so the image does not judder
+       mid-scroll; the `vh` line before it is the fallback for browsers that
+       do not know the unit, which would otherwise drop the declaration and
+       collapse the frame to nothing — its children are absolutely positioned.
+
+       Sized so the frame plus the caption under it clears a phone screen in
+       one view: the studio's note was that an image took two screens to see. */
+    height: 48vh;
+    height: 48svh;
+    min-height: min(17rem, 54vh);
   }
 
   @media (min-width: 768px) {
-    .hero-scrim {
-      background: linear-gradient(
-        to top,
-        rgb(0 0 0 / 0.72) 0%,
-        rgb(0 0 0 / 0.6) 14%,
-        rgb(0 0 0 / 0.44) 32%,
-        rgb(0 0 0 / 0.26) 50%,
-        rgb(0 0 0 / 0.12) 70%,
-        transparent 100%
-      );
-    }
-  }
-
-  /**
-   * Hero pan.
-   *
-   * Each photograph is held slightly oversize and drifts right to left for as
-   * long as it is on screen, so the hero is never a still frame. The scale is
-   * what buys the travel: at 1.14 there is 7% of the image hanging off each
-   * edge, comfortably more than the 2.6% the pan actually uses, so no edge is
-   * ever exposed. The timing is linear on purpose: an eased curve spends
-   * almost all of its travel in the first second or so and then holds still
-   * for the rest of the slide, which reads as no movement at all. A drift has
-   * to be constant to be felt.
-   *
-   * The duration is the slide interval plus the crossfade, so the outgoing
-   * image is still travelling while it fades out and the incoming one is
-   * already moving before it is fully opaque — the two are never both still.
-   * `both` holds the end frame through the last moment of the fade.
-   */
-  .hero-pan {
-    animation: hero-pan 7000ms linear both;
-    will-change: transform;
-  }
-
-  /* Desktop shows far more of the frame than a phone crop does, so the same
-     scale/translate reads as a harder, faster zoom at that size. Slower and
-     shallower here; mobile is untouched. */
-  @media (min-width: 768px) {
-    .hero-pan {
-      animation-name: hero-pan-desktop;
-      animation-duration: 10000ms;
-    }
-  }
-
-  /* This one is genuine camera motion, so it goes when motion is unwanted.
-     The crossfade underneath it stays — that is how a phone reader sees the
-     other five projects at all. */
-  @media (prefers-reduced-motion: reduce) {
-    .hero-pan {
-      animation: none;
-      transform: scale(1.06);
-    }
-  }
-
-  /**
-   * Hero height.
-   *
-   * `svh` is the right unit here — it is the viewport with the browser chrome
-   * showing, so the hero does not resize as the address bar hides and the page
-   * does not judder mid-scroll. But Safari only learned it in 15.4, and a
-   * browser that does not understand the declaration drops it entirely, which
-   * would leave the hero with no height at all: its children are absolutely
-   * positioned, so it would collapse to nothing.
-   *
-   * The `vh` line before it is the fallback every browser understands, and the
-   * min-height is the floor for a short landscape window.
-   */
-  .hero-height {
-    height: 68vh;
-    height: 68svh;
-    /* A floor for tall screens, but never taller than the screen itself —
-       a phone held sideways is only ~390px high, and a fixed 27.5rem floor
-       would push the project caption off the bottom of it. */
-    min-height: min(27.5rem, 80vh);
-  }
-
-  @media (min-width: 768px) {
-    .hero-height {
-      height: 78vh;
-      height: 78svh;
+    .hero-frame {
+      height: 62vh;
+      height: 62svh;
     }
   }
 
@@ -590,24 +523,6 @@
 
   .intro-curtain[data-intro-claimed] {
     animation: none;
-  }
-}
-
-@keyframes hero-pan {
-  from {
-    transform: scale(1.16) translate3d(3.6%, 0, 0);
-  }
-  to {
-    transform: scale(1.1) translate3d(-3.6%, 0, 0);
-  }
-}
-
-@keyframes hero-pan-desktop {
-  from {
-    transform: scale(1.08) translate3d(2%, 0, 0);
-  }
-  to {
-    transform: scale(1.04) translate3d(-2%, 0, 0);
   }
 }
 

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Carlito } from "next/font/google";
 
 import { Footer } from "@/components/chrome/Footer";
 import { Header } from "@/components/chrome/Header";
@@ -11,16 +11,24 @@ import { studio } from "@/content/studio";
 import "./globals.css";
 
 /**
- * One family, three weights. The design system leans on size, tracking and
- * whitespace rather than typographic variety, so a second face would only
- * dilute it. Swapping the studio onto a different grotesque later is a change
- * to this import and the `--font-sans` token — nothing else.
+ * Calibri, as the studio asked for.
+ *
+ * Calibri is a Microsoft face and cannot be served as a webfont, and it ships
+ * on Windows only — with this site's audience being overwhelmingly mobile,
+ * naming it alone would have meant almost nobody actually saw it. So the stack
+ * names Calibri first, for the Windows machines that have it, and loads
+ * Carlito behind it for everyone else: an open face drawn to Calibri's exact
+ * metrics, so the two set identically and the page does not reflow between
+ * them.
+ *
+ * Carlito ships regular and bold only, which is why the type scale no longer
+ * calls for a 300 or a 500 — see the `--text-*--font-weight` tokens.
  */
-const inter = Inter({
+const carlito = Carlito({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["400", "700"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-carlito",
 });
 
 // `||`, not `??`: Vercel's import UI sets an env var it collected an empty
@@ -72,7 +80,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={carlito.variable} suppressHydrationWarning>
       <head>
         {/*
           Sets `data-theme` before hydration when a reader has manually

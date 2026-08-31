@@ -14,37 +14,23 @@ import { featuredProjects, heroSlides } from "@/content/projects";
 import { studio } from "@/content/studio";
 import { SIZES } from "@/lib/media";
 
+/**
+ * The featured projects alternate measure as you scroll — full, then held to
+ * a narrower column, and back. The change of width is what stops five stacked
+ * photographs from reading as a list. Widths only: the images themselves are
+ * never cropped, so each one keeps whatever proportions it arrived with.
+ */
 const FULL = {
   wrap: "",
-  ratio: "hero",
   sizes: SIZES.full,
 } as const;
 
-/**
- * Featured projects step down in width as you scroll — full, full, two-thirds.
- * The change of measure is what stops three stacked photographs from reading
- * as a list.
- */
-const FEATURED_WIDTHS = [
-  FULL,
-  FULL,
-  {
-    wrap: "md:max-w-[70%]",
-    ratio: "hero",
-    sizes: SIZES.twoThirds,
-  },
-] as const;
-
-/**
- * A drawing is not a photograph and does not survive a 16:9 crop. Contained
- * figures get a narrow upright plate instead — the way a plan is printed in a
- * monograph — so the sheet is large enough to actually read.
- */
-const PLATE = {
-  wrap: "md:max-w-[46%]",
-  ratio: "portrait",
-  sizes: SIZES.plate,
+const INSET = {
+  wrap: "md:max-w-[72%]",
+  sizes: SIZES.twoThirds,
 } as const;
+
+const FEATURED_WIDTHS = [FULL, INSET, FULL, INSET, FULL] as const;
 
 export default function HomePage() {
   const latest = news.slice(0, 3);
@@ -75,11 +61,8 @@ export default function HomePage() {
           </h2>
 
           <div className="space-y-(--spacing-section)">
-            {featuredProjects.slice(0, 3).map((project, i) => {
-              const width =
-                project.hero.fit === "contain"
-                  ? PLATE
-                  : (FEATURED_WIDTHS[i] ?? FULL);
+            {featuredProjects.map((project, i) => {
+              const width = FEATURED_WIDTHS[i] ?? FULL;
               return (
                 <article key={project.slug} className={width.wrap}>
                   <Link
@@ -106,10 +89,9 @@ export default function HomePage() {
                             }
                           : project.hero
                       }
-                      ratio={width.ratio}
+                      ratio="landscape"
                       sizes={width.sizes}
                       showCaption={false}
-                      className="overflow-hidden [&_img]:transition-transform [&_img]:duration-700 [&_img]:ease-(--ease-out-quint) group-hover:[&_img]:scale-[1.02]"
                     />
                   </Link>
                 </article>
@@ -148,7 +130,6 @@ export default function HomePage() {
                     sizes={SIZES.third}
                     showCaption={false}
                     reveal={false}
-                    className="overflow-hidden [&_img]:transition-transform [&_img]:duration-700 [&_img]:ease-(--ease-out-quint) group-hover:[&_img]:scale-[1.03]"
                   />
                   <Eyebrow className="mt-5">
                     {item.category} · {formatNewsDate(item.date)}

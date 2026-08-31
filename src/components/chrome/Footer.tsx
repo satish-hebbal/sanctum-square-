@@ -41,13 +41,10 @@ export function Footer() {
               className="flex items-center gap-4 transition-opacity duration-300 hover:opacity-60"
             >
               <LogoMark className="h-8 w-auto" />
-              <span className="text-[1.0625rem] leading-none font-medium tracking-[0.18em] uppercase">
+              <span className="text-[1.0625rem] leading-none font-normal tracking-[0.18em] uppercase">
                 {studio.name}
               </span>
             </Link>
-            <p className="text-body mt-6 max-w-72 text-graphite">
-              {studio.motto}
-            </p>
           </div>
 
           {/* The three link columns are padded down by the difference between

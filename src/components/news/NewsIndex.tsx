@@ -28,9 +28,6 @@ function MaybeLink({
   );
 }
 
-const HOVER_ZOOM =
-  "overflow-hidden [&_img]:transition-transform [&_img]:duration-700 [&_img]:ease-(--ease-out-quint) group-hover:[&_img]:scale-[1.03]";
-
 export function NewsIndex({
   items,
   categories,
@@ -93,7 +90,6 @@ export function NewsIndex({
                     priority
                     showCaption={false}
                     reveal={false}
-                    className={HOVER_ZOOM}
                   />
                 </div>
 
@@ -123,7 +119,6 @@ export function NewsIndex({
                     sizes={SIZES.third}
                     showCaption={false}
                     reveal={false}
-                    className={HOVER_ZOOM}
                   />
                   <Eyebrow className="mt-5">
                     {item.category} · {formatNewsDate(item.date)}

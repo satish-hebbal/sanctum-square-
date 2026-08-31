@@ -1,9 +1,8 @@
 export const studio = {
   name: "Sanctum Square",
   legalName: "Sanctum Square Studio",
-  /** Brand line and motto as written in the studio's own profile deck. */
-  tagline: "Architecture · Interiors · Construction",
-  motto: "Designing with passion, building with precision.",
+  /** Brand line as written in the studio's own profile deck. */
+  tagline: "Architecture · Interiors · Design",
   description:
     "Design-led architecture, interiors and construction practice with offices in Bengaluru and Hubballi.",
 
@@ -26,16 +25,6 @@ export const studio = {
     name: "Sanjana S Hallad",
     role: "Founder & Principal Architect",
     bio: "A graduate of MS Ramaiah School of Architecture, Bengaluru (2018), Sanjana brings a calm, thoughtful, and contemporary design approach to the studio. Before founding her own practice, she contributed to and consulted on projects across Bengaluru, Mumbai and Hyderabad — spanning residences, corporate offices, retail spaces, institutional campuses, residential interiors and landscape design.",
-    credits: [
-      {
-        label: "Corporate",
-        value: "India Business Centre, Kalyan Jewellers Mumbai — 50,000 sft",
-      },
-      { label: "Institutional", value: "Jain Design College" },
-      { label: "Landscape", value: "Business parks including Oracle" },
-      { label: "Renovation", value: "Century Club, Bengaluru" },
-      { label: "Interiors", value: "20+ residences, luxury villas and gated communities" },
-    ],
   },
 
   services: [

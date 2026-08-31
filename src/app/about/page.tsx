@@ -4,7 +4,6 @@ import { MapPin } from "lucide-react";
 import { Figure } from "@/components/media/Figure";
 import {
   Container,
-  DataList,
   Eyebrow,
   Section,
   SectionHead,
@@ -221,8 +220,6 @@ export default function AboutPage() {
                   {studio.founder.bio}
                 </p>
               </div>
-
-              <DataList className="mt-10" items={studio.founder.credits} />
             </div>
           </div>
         </Container>

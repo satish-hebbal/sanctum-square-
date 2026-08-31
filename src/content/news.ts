@@ -10,20 +10,6 @@ import type { NewsItem } from "@/lib/types";
  */
 export const news: NewsItem[] = [
   {
-    slug: "igatpuri-hills-master-plan",
-    category: "News",
-    date: "2026-08-11",
-    title: "Igatpuri Hills master plan enters detailed planning",
-    excerpt:
-      "The contour-sensitive township in Maharashtra sets out 657 residential plots across a land use split of 48% plots, 26% roads, 15% amenity and 10% green area, with the road hierarchy following the site's natural gradients.",
-    figure: {
-      media: "igatpuri/master-plan-igt-23-04-26-4-17-page",
-      alt: "The Igatpuri Hills master plan drawing, showing zoning, green corridors and the contour-following road network.",
-      fit: "contain",
-    },
-    project: "igatpuri-hills-township",
-  },
-  {
     slug: "rotson-sales-lounge-model-platform",
     category: "News",
     date: "2026-06-25",

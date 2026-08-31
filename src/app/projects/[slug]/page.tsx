@@ -16,22 +16,6 @@ import { getNextProject, getProject, projects } from "@/content/projects";
 import { SIZES } from "@/lib/media";
 
 
-/**
- * A single figure in a section defaults to a wide landscape frame — right for
- * the site's photography, which is shot and curated for that crop. A drawing
- * (`fit: "contain"`) is not curated for any crop: it must not be stretched
- * into an aspect it was never drawn for. So for those, pick the frame from
- * the drawing's own proportions instead of assuming landscape — a tall
- * technical sheet gets a portrait frame, or it sits in a wide box with the
- * page's stone colour filling most of it either side, which is the empty
- * space this exists to avoid.
- */
-function singleFigureRatio(figure: { media: keyof typeof media; fit?: "cover" | "contain" }) {
-  if (figure.fit !== "contain") return "landscape" as const;
-  const { width, height } = media[figure.media];
-  return height > width ? ("portrait" as const) : ("landscape" as const);
-}
-
 type Params = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
@@ -61,9 +45,6 @@ export default async function ProjectPage({ params }: Params) {
   if (!project) notFound();
 
   const next = getNextProject(project.slug);
-  // A drawing gets a shallower frame than a photograph, so the contained
-  // image is not stranded in a band of empty stone.
-  const isDrawing = project.hero.fit === "contain";
 
   return (
     <article>
@@ -77,7 +58,7 @@ export default async function ProjectPage({ params }: Params) {
             ? { ...project.heroOverlay, backdrop: project.hero.media }
             : project.hero
         }
-        ratio={isDrawing ? "landscape" : "hero"}
+        ratio="hero"
         sizes={SIZES.viewport}
         priority
         showCaption={false}
@@ -160,9 +141,7 @@ export default async function ProjectPage({ params }: Params) {
                         key={figure.media}
                         figure={figure}
                         ratio={
-                          section.figures!.length > 1
-                            ? "card"
-                            : singleFigureRatio(figure)
+                          section.figures!.length > 1 ? "card" : "landscape"
                         }
                         sizes={
                           section.figures!.length > 1 ? SIZES.half : SIZES.body
