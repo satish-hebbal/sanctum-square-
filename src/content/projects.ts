@@ -72,30 +72,34 @@ export const projects: Project[] = [
         ],
         figures: [
           {
-            media: "mantra-residency/whatsapp-image-2026-08-11-at-1-07-26-pm",
-            alt: "Conference room with a long timber table, upholstered chairs and full-height curtains.",
+            media: "mantra-residency/img-9580",
+            alt: "Conference room with a long stone-topped table, dark executive chairs and a wall-mounted screen framed in timber panelling.",
             caption: "Conference room",
           },
           {
-            media: "mantra-residency/whatsapp-image-2026-08-11-at-1-07-29-pm",
-            alt: "Banquet hall with a slatted timber ceiling and rows of seating along a window wall.",
-            caption: "Banquet hall",
+            media: "mantra-residency/img-9586",
+            alt: "Restaurant with teal banquettes, rust and teal upholstered chairs, and woven pendant lights hung from a suspended timber lattice.",
+            caption: "Restaurant",
           },
         ],
       },
     ],
     gallery: [
       {
-        media: "mantra-residency/whatsapp-image-2026-08-11-at-1-07-27-pm",
-        alt: "Backlit Mantra Fine Dine signage mounted on a dark slatted timber wall.",
+        media: "mantra-residency/img-9595",
+        alt: "Reception lounge with a pair of grey armchairs on a patterned round rug, set before backlit Mantra Fine Dine signage on a curved slatted timber wall.",
       },
       {
-        media: "mantra-residency/whatsapp-image-2026-08-11-at-1-07-28-pm",
-        alt: "Restaurant seating with banquettes, patterned drapery and pendant lighting.",
+        media: "mantra-residency/img-9589",
+        alt: "The restaurant's long banquette running beneath a window wall, with pendant lights and a timber lattice overhead.",
       },
       {
-        media: "mantra-residency/whatsapp-image-2026-08-11-at-1-07-29-pm-1",
-        alt: "Second conference room with a stone-topped table and dark executive chairs.",
+        media: "mantra-residency/img-9591",
+        alt: "Looking up at the suspended timber lattice and its cluster of woven pendant lights.",
+      },
+      {
+        media: "mantra-residency/img-9569",
+        alt: "Head of the conference room: a row of dark executive chairs before a framed artwork set into timber panelling.",
       },
       {
         media: "mantra-residency/facade-night-wide",

@@ -142,40 +142,47 @@ export const media = {
     blurDataURL:
       "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAABwBACdASoQABMAPu1iqU2ppaQiMAgBMB2JZgCdMoK8AA5G8kB3/rZOouyAoAD+2YvgMNAj2z7Yh2016mNz4PrwmIHjr8yp1sAXzx3ovD5iiLwNkRTCxGJ58tIfKupcurNfJQiQ2n755B4k58SX/4QG6I9fCkcdMql45ZNgAAA=",
   },
-  "mantra-residency/whatsapp-image-2026-08-11-at-1-07-26-pm": {
-    src: "/media/mantra-residency/whatsapp-image-2026-08-11-at-1-07-26-pm.webp",
-    width: 720,
-    height: 999,
+  "mantra-residency/img-9569": {
+    src: "/media/mantra-residency/img-9569.webp",
+    width: 2560,
+    height: 1920,
     blurDataURL:
-      "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAAAwBACdASoQABYAPu1iqU2ppaOiMAgBMB2JaACdMoRwAdBY9A29HWxopgAA+/Lzvq81MfRpw5ENP5nUlCCKZjRf2qOdGaB0zXfDW2ziMlcxaEVhKpyis5MQ+6RyPQK8bVpCBAhox10t0+oe/pay1Q2Y/e5HJeGvCIZ1sAAA",
+      "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAAAQAgCdASoQAAwAA4BaJYgCdAD6HPoy2OgAAP7GBjcXauz3TEEkC3Mm8gR2cZPjGCiqOaOTNwxbnUVx3KSh5bLt6Nr2CEmATnJhKkcLKrCGdTlHTwAAAA==",
   },
-  "mantra-residency/whatsapp-image-2026-08-11-at-1-07-27-pm": {
-    src: "/media/mantra-residency/whatsapp-image-2026-08-11-at-1-07-27-pm.webp",
-    width: 720,
-    height: 948,
+  "mantra-residency/img-9580": {
+    src: "/media/mantra-residency/img-9580.webp",
+    width: 2560,
+    height: 1920,
     blurDataURL:
-      "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAwCdASoQABUAPu1iqU2ppaQiMAgBMB2JZQC7ACPgC5qsXBHjg6AAAP7l/Lxj0TEmU1WLmP9gt0W3MBMKpgyMoaeb/OLzobHaFK9yS6RTCivkAAA=",
+      "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAQCdASoQAAwAA4BaJZACsADwhHsQMCAA99kar51ICuj/bMpJdtHNBwksjxh5jPymiPk13DZy78JrloJIOnLSomAIt7Ky0YC1nNiSa0OGtrcOSjfobv9q3AAAAA==",
   },
-  "mantra-residency/whatsapp-image-2026-08-11-at-1-07-28-pm": {
-    src: "/media/mantra-residency/whatsapp-image-2026-08-11-at-1-07-28-pm.webp",
-    width: 720,
-    height: 1003,
+  "mantra-residency/img-9586": {
+    src: "/media/mantra-residency/img-9586.webp",
+    width: 1914,
+    height: 1436,
     blurDataURL:
-      "data:image/webp;base64,UklGRqoAAABXRUJQVlA4IJ4AAADQBACdASoQABYAPu1iqU2ppaOiMAgBMB2JaACdMoFWZgV8mEqS8g1GO77mVuDMEAD+J4d0nuMuduyisYp52gDLjQAaNqzyWp73hyptQo0QSNE7OigpOjpycPwSDnZRtbuPa8vEk/t4+CIbZttuCeOsmjoKr7OlL4Z8NToX6810Gof2rVvP//60Cl5y+pe0y9iaLBJwi+MBtNxQKJwAAA==",
+      "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAQCdASoQAAwAA4BaJZACdACyWNKkAADNdGSLpIutefiUOMpxru6zKGIIQp1wOBi0V2siRZcuDLSFetd7sSF/a3UCuKfDu3KBDwpiEwjwAA==",
   },
-  "mantra-residency/whatsapp-image-2026-08-11-at-1-07-29-pm": {
-    src: "/media/mantra-residency/whatsapp-image-2026-08-11-at-1-07-29-pm.webp",
-    width: 720,
-    height: 920,
+  "mantra-residency/img-9589": {
+    src: "/media/mantra-residency/img-9589.webp",
+    width: 2560,
+    height: 1920,
     blurDataURL:
-      "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAQBACdASoQABQAPu1iqU2ppaOiMAgBMB2JaACdABelJ9bTZsc6IVdewAD+vnukkhifG3+K7+Fwh1Mu1NM9h7WdtRmWRqpMmOhM/0urmqHRwwpmaB8Pk8Y2WZHjQBXfCMz1PqdcZ6j/8kq54c2RAAAA",
+      "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAAAwAgCdASoQAAwAA4BaJYgCdAD6HXQ8+PiugAD+g3Tw0jiGPbE/nsfRNil7QWlO/l+MLD15WBOcIdf6zPSmQcM13bHjIM91wFUUQmOlsvsaKHSJZ1pP5vDTUAA=",
   },
-  "mantra-residency/whatsapp-image-2026-08-11-at-1-07-29-pm-1": {
-    src: "/media/mantra-residency/whatsapp-image-2026-08-11-at-1-07-29-pm-1.webp",
-    width: 720,
-    height: 919,
+  "mantra-residency/img-9591": {
+    src: "/media/mantra-residency/img-9591.webp",
+    width: 1920,
+    height: 2560,
     blurDataURL:
-      "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAAAwBACdASoQABQAPu1iqU2ppaOiMAgBMB2JZQCdAB61pMvvHuYaTU4UygAA/ZwCsk0HRgcDrtlOw//2HL27A0MLTqtrweLM+nLXDdt1I+EEGmkX5nqBCSQoh9KsofPJNcWhwziQ5ulZ15lsbK9+Z49dYzonbk3mKTNBgpVuBMITR/7sAAA=",
+      "data:image/webp;base64,UklGRqIAAABXRUJQVlA4IJYAAAAQBACdASoQABUAPu1iqU2ppaOiMAgBMB2JZACdMoGv/gK0LoDL1F0o1AD7q7v6i3BhjqTNFDM1Jp4u0lOkSV7gcaKOTNs+dpoaXZA4mZLWUDDFKLUtvX+BD5MS3tA+Sf0yWPvg1e1mBOrDvwfJyMNdujCaoGetwFfEvb+KPaRaRIqLslpzAljT2ZWDnVrDmcG2BhFrwAA=",
+  },
+  "mantra-residency/img-9595": {
+    src: "/media/mantra-residency/img-9595.webp",
+    width: 2138,
+    height: 2138,
+    blurDataURL:
+      "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADQAQCdASoQABAAA4BaJZgCdADHysAuAAD+v717aAt+kclcbcvoVYJs8em/kjEKI3kM59IJZexzmCSF1StIi382hwm238nLF2OCFdG3V+KHIi0k0HMHmwJpLodxflNulX8AAA==",
   },
   "mr-srinivasan-madhavan-residence/bay-window": {
     src: "/media/mr-srinivasan-madhavan-residence/bay-window.webp",
@@ -517,7 +524,13 @@ export const media = {
 
 // Video in assets/source, deliberately not copied into public/media. To use
 // one, copy it in and reference it explicitly — see scripts/process-images.mjs.
+//   mantra-residency/img-9594  (assets/source/MANTRA RESIDENCY/IMG_9594.mov)
+//   mantra-residency/img-9604  (assets/source/MANTRA RESIDENCY/IMG_9604.MOV)
+//   mantra-residency/img-9606  (assets/source/MANTRA RESIDENCY/IMG_9606.MOV)
 //   mantra-residency/whatsapp-video-2026-08-11-at-11-43-16-am  (assets/source/MANTRA RESIDENCY/WhatsApp Video 2026-08-11 at 11.43.16 AM.mp4)
+//   mantra-residency/whatsapp-video-2026-09-15-at-11-46-37-am  (assets/source/MANTRA RESIDENCY/WhatsApp Video 2026-09-15 at 11.46.37 AM.mp4)
+//   mantra-residency/whatsapp-video-2026-09-15-at-11-46-40-am  (assets/source/MANTRA RESIDENCY/WhatsApp Video 2026-09-15 at 11.46.40 AM.mp4)
+//   mantra-residency/whatsapp-video-2026-09-15-at-11-46-54-am  (assets/source/MANTRA RESIDENCY/WhatsApp Video 2026-09-15 at 11.46.54 AM.mp4)
 //   prakash-kori/in-progerss/whatsapp-video-2026-08-11-at-11-59-12-am-2  (assets/source/PRAKASH KORI/In progerss /WhatsApp Video 2026-08-11 at 11.59.12 AM (2).mp4)
 //   umarani/in-progress/dinning  (assets/source/UMARANI/IN PROGRESS/DINNING.mp4)
 
