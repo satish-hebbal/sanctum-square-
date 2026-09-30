@@ -21,17 +21,16 @@ import { LogoMark } from "@/components/ui/LogoMark";
  */
 export function Footer() {
   return (
-    <footer className="overflow-x-clip border-t border-hairline">
+    <footer className="relative isolate overflow-x-clip border-t border-hairline">
+      {/* The mark's line work as a ground: bottom left, bottom right, and a
+          larger one rising out of the bottom edge. See .footer-pattern. */}
+      <div aria-hidden className="footer-pattern">
+        <span className="footer-pattern-left" />
+        <span className="footer-pattern-center" />
+        <span className="footer-pattern-right" />
+      </div>
       <Container>
-        <div className="relative isolate grid gap-(--spacing-block) py-(--spacing-section) md:grid-cols-12 md:gap-(--spacing-col-gap)">
-          {/* The mark once more, filling the empty lower right the stacked
-              mobile columns leave behind and bleeding off the gutter. Struck
-              into the paper rather than printed on it — see .footer-mark —
-              and behind the links; the desktop grid has no such gap. */}
-          <span
-            aria-hidden
-            className="footer-mark pointer-events-none absolute bottom-0 -z-10 right-[calc(var(--spacing-gutter)*-1)] w-64 translate-x-[60px] md:hidden"
-          />
+        <div className="grid gap-(--spacing-block) py-(--spacing-section) md:grid-cols-12 md:gap-(--spacing-col-gap)">
           <div className="md:col-span-5 xl:col-span-4">
             {/* A second route home. The header logo was the only one on the
                 site, which is a lot to rest on a 28px mark. */}
